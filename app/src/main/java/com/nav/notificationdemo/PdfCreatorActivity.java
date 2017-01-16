@@ -20,7 +20,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -44,7 +43,7 @@ public class PdfCreatorActivity extends AppCompatActivity {
     public static final int REQUEST_WRITE_PERMISSION = 19882;
 
     @BindView(R.id.myWebView)
-    WebView webView;
+    CustomWebView webView;
 
     @BindView(R.id.myImageView)
     ImageView myImageView;
@@ -52,21 +51,29 @@ public class PdfCreatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            WebView.enableSlowWholeDocumentDraw();
+        }
         setContentView(R.layout.activity_pdf_creator);
         ButterKnife.bind(this);
 
 //        webView.loadUrl("file:///android_asset/html/demo.html");
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            webView.enableSlowWholeDocumentDraw();
-//        }
+
         WebSettings webSettings = webView.getSettings();
         webSettings.setBuiltInZoomControls(true);
 
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setDefaultTextEncodingName("UTF-8");
-//webSettings.setUseWideViewPort(true);
-        webView.loadUrl("file:///android_asset/html/demo.html");
+//        webSettings.setUseWideViewPort(true);
+        webView.loadUrl("file:///android_asset/html/demo2.html");
+
 //        webView.loadDataWithBaseURL("file:///android_asset/html/", "demo.html", "text/html", "UTF-8", null);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @OnClick(R.id.print2)
+    public void createPdf2() {
+        createWebPrintJob2(webView);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -93,7 +100,7 @@ public class PdfCreatorActivity extends AppCompatActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
         PdfDocument document = new PdfDocument();
         View content = webView;//findViewById(R.id.activity_social_sign_in);
@@ -109,8 +116,8 @@ public class PdfCreatorActivity extends AppCompatActivity {
 
         // finish the page
         document.finishPage(page);
-
-//        PdfDocument document = createMultiPagePdfDocument(webView.getMeasuredWidth(), webView.getMeasuredHeight());
+*/
+        PdfDocument document = createMultiPagePdfDocument(webView.getContentWidth(), webView.getContentHeight());
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 
         try {
@@ -123,6 +130,24 @@ public class PdfCreatorActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void createWebPrintJob2(WebView webView) {
+
+        // Get a PrintManager instance
+        PrintManager printManager = (PrintManager)
+                getSystemService(Context.PRINT_SERVICE);
+
+        // Get a print adapter instance
+        PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
+
+        // Create a print job with name and adapter instance
+        String jobName = getString(R.string.app_name) + " Document";
+        printManager.print(jobName, printAdapter,
+                new PrintAttributes.Builder().build());
+
+        // Save the job object for later status checking
 
     }
 
@@ -139,7 +164,7 @@ public class PdfCreatorActivity extends AppCompatActivity {
 
                 try {
 
-                    AssetFileDescriptor fileDescriptor = getAssets().openFd("html/demo.html");
+                    AssetFileDescriptor fileDescriptor = getAssets().openFd("html/demo2.html");
                     input = new FileInputStream(fileDescriptor.getFileDescriptor());
 
                     output = new FileOutputStream(destination.getFileDescriptor());
@@ -224,12 +249,14 @@ public class PdfCreatorActivity extends AppCompatActivity {
 
     /* Find the Letter Size Height depending on the Letter Size Ratio and given Page Width */
         int letterSizeHeight = getLetterSizeHeight(webViewWidth);
+        PrintAttributes.Margins margins = new PrintAttributes.Margins(12, 12, 12, 12);
         PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
                 setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME).
-                setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asLandscape()).
+                setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asPortrait()).
                 setResolution(new PrintAttributes.Resolution("zooey", PRINT_SERVICE, 300, 300)).
-                setMinMargins(PrintAttributes.Margins.NO_MARGINS).
+                setMinMargins(margins).
                 build();
+
         PdfDocument document = new PrintedPdfDocument(this, pdfPrintAttrs);
 
         final int numberOfPages = (webViewHeight/letterSizeHeight) + 1;
@@ -238,12 +265,12 @@ public class PdfCreatorActivity extends AppCompatActivity {
 
             int webMarginTop = i*letterSizeHeight;
 
-            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(webViewWidth, letterSizeHeight, i+1).create();
+            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(webViewWidth, letterSizeHeight+20, i+1).create();
             PdfDocument.Page page = document.startPage(pageInfo);
 
         /* Scale Canvas */
             page.getCanvas().translate(0, -webMarginTop);
-            webView.draw(page.getCanvas());
+            webView.capturePicture().draw(page.getCanvas());
 
             document.finishPage(page);
         }

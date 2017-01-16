@@ -2,6 +2,10 @@ body, html{
 	height:100%;
 	font-size:12px;
 }
+.all{
+	width:764px;
+	padding: 30px;
+}
 table, p{
 	font-size:12px;
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.nav.notificationdemo.PdfCreatorActivity">
 
-    <WebView
+    <com.nav.notificationdemo.CustomWebView
         android:id="@+id/myWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,11 +15,18 @@
         android:id="@+id/myImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/print" />
+        android:layout_above="@+id/print"/>
     <Button
         android:id="@+id/print"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:text="Print"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        android:id="@+id/print2"
+        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:text="Print 2"
+        android:layout_toRightOf="@id/print"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
