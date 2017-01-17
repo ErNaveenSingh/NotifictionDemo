@@ -1,4 +1,4 @@
-package com.nav.notificationdemo;
+package com.nav.notificationdemo.pdf;
 
 import android.Manifest;
 import android.content.Context;
@@ -23,6 +23,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+
+import com.nav.notificationdemo.R;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package com.nav.notificationdemo;
+package com.nav.notificationdemo.notification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
+
+import com.nav.notificationdemo.R;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -37,7 +39,7 @@ public class MyNotificationManager {
     }
 
     public static void createTextNotification(Context context, String message, String summaryText
-            , String bigContentTitle){
+            , String bigContentTitle) {
         Intent dismissIntent = new Intent(context, NotificationOpenActivity.class);
         dismissIntent.setAction("Dismiss");
         PendingIntent piDismiss = PendingIntent.getService(context, 0, dismissIntent, 0);
@@ -54,7 +56,7 @@ public class MyNotificationManager {
     }
 
     public static void createImageNotification(Context context, String message, String summaryText
-            , String bigContentTitle, @NonNull Bitmap bm){
+            , String bigContentTitle, @NonNull Bitmap bm) {
 
         Intent dismissIntent = new Intent(context, NotificationOpenActivity.class);
         dismissIntent.setAction("Dismiss");
@@ -71,8 +73,8 @@ public class MyNotificationManager {
         showNotification(context, builder);
     }
 
-    public static void showNotification(Context context, NotificationCompat.Builder builder){
-        Intent resultIntent = new Intent(context, NotificationOpenActivity.class);
+    public static void showNotification(Context context, NotificationCompat.Builder builder) {
+        /*Intent resultIntent = new Intent(context, NotificationOpenActivity.class);
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         context,
@@ -80,10 +82,11 @@ public class MyNotificationManager {
                         resultIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
+        */
 
+        Intent intent = new Intent(context, ClickBroadcast.class);
+        PendingIntent resultPendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         builder.setContentIntent(resultPendingIntent);
-
-
         // Gets an instance of the MyNotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);

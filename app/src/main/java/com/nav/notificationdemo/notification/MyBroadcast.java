@@ -1,12 +1,12 @@
-package com.nav.notificationdemo;
+package com.nav.notificationdemo.notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import static com.nav.notificationdemo.MyNotificationManager.bigContentTitle;
-import static com.nav.notificationdemo.MyNotificationManager.message;
-import static com.nav.notificationdemo.MyNotificationManager.summaryText;
+import static com.nav.notificationdemo.notification.MyNotificationManager.bigContentTitle;
+import static com.nav.notificationdemo.notification.MyNotificationManager.message;
+import static com.nav.notificationdemo.notification.MyNotificationManager.summaryText;
 
 /**
  * Created by naveensingh on 10/01/17.

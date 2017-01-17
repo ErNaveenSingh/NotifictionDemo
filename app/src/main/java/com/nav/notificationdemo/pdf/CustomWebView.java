@@ -1,4 +1,4 @@
-package com.nav.notificationdemo;
+package com.nav.notificationdemo.pdf;
 
 import android.content.Context;
 import android.util.AttributeSet;

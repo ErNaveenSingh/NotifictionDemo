@@ -1,4 +1,4 @@
-package com.nav.notificationdemo;
+package com.nav.notificationdemo.pdf;
 
 import android.Manifest;
 import android.content.Context;
@@ -19,6 +19,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import com.nav.notificationdemo.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -153,7 +155,7 @@ public class PdfCreater2Activity extends AppCompatActivity {
         PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
                 setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME).
                 setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asPortrait()).
-                setResolution(new PrintAttributes.Resolution("zooey", PRINT_SERVICE, 300, 300)).
+                setResolution(new PrintAttributes.Resolution("zooey", PRINT_SERVICE, 72, 72)).
                 setMinMargins(margins).
                 build();
 

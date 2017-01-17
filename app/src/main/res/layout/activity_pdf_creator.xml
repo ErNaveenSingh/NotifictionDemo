@@ -4,9 +4,9 @@
     android:id="@+id/activity_pdf_creator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nav.notificationdemo.PdfCreatorActivity">
+    tools:context="com.nav.notificationdemo.pdf.PdfCreatorActivity">
 
-    <com.nav.notificationdemo.CustomWebView
+    <com.nav.notificationdemo.pdf.CustomWebView
         android:id="@+id/myWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
