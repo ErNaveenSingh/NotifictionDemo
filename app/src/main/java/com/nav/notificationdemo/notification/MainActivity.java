@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
      */
 
+    public static boolean isRunning = false;
 
     private long ONE_MINUTES = 60 * 1000;
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        isRunning = true;
     }
 
     @Override

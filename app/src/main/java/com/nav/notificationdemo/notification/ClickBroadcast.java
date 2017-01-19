@@ -20,21 +20,32 @@ public class ClickBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (!isAppOpened(context)) {
+        //App is in foreground
+        if (isAppOpened(context)) {
             /*
-            if app is in background open new activity
-             */
-            Intent newIntent = new Intent(context, NotificationOpenActivity.class);
-            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(newIntent);
-        }else{
-            /*
-            else generate a local broadcast and notify any listening activity
+            generate a local broadcast and notify any listening activity
              */
             Intent newIntent = new Intent(INTENT_FILTER);
             //Put your all data using put extra
             newIntent.putExtra("key", "Notification was clicked");
             LocalBroadcastManager.getInstance(context).sendBroadcast(newIntent);
+        }else if(MainActivity.isRunning){
+            //App is in background
+            /*
+            Open an empty activity to bring the app in front
+             */
+            Intent newIntent = new Intent(context, NothingActivity.class);
+            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(newIntent);
+        } else{
+            //App is not running
+            /*
+            app is in background open new activity
+             */
+            Intent newIntent = new Intent(context, NotificationOpenActivity.class);
+            newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(newIntent);
+
         }
     }
 
