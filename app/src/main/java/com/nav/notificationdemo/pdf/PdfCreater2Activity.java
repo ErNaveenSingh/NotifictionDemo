@@ -192,6 +192,6 @@ public class PdfCreater2Activity extends AppCompatActivity {
      * @return
      */
     private int getLetterSizeHeight(int width) {
-        return (int)((float)(11*width)/8.5);
+        return (int)((float)(11.69*width)/8.27);
     }
 }
