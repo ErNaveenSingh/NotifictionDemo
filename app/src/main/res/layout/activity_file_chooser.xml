@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_file_chooser"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.nav.notificationdemo.filechooser.FileChooserActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_normal"
+        android:text="Steps to import"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_medium" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/file_chooser_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/title"
+        android:layout_margin="@dimen/padding_small"
+        android:layout_weight="1" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_below="@id/file_chooser_viewPager"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:layout_marginBottom="@dimen/padding_normal"
+        app:ci_drawable="@drawable/grey_circle" />
+
+    <TextView
+        android:id="@+id/select_file_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pressable_button"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/padding_normal"
+        android:text="SELECT FILE \n(xlsx, xls)"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_large" />
+</LinearLayout>

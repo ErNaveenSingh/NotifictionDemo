@@ -12,15 +12,9 @@
         android:theme="@style/AppTheme">
 
         <!-- Notification Start -->
-        <activity android:name=".notification.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".notification.MainActivity" />
         <activity android:name=".notification.NotificationOpenActivity" />
-        <activity android:name=".notification.NothingActivity"/>
+        <activity android:name=".notification.NothingActivity" />
 
         <receiver android:name=".notification.MyBroadcast" />
         <receiver android:name=".notification.ClickBroadcast" />
@@ -32,6 +26,41 @@
         <activity android:name=".pdf.PdfCreatorActivity" />
         <!-- PDF End -->
 
+
+        <!-- File Chooser Start -->
+        <activity android:name=".filechooser.SampleActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".filechooser.FileChooserActivity"/>
+        <activity
+            android:name=".filechooser.MyFilePickerActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FilePickerTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.nononsenseapps.filepicker.FilePickerActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FilePickerTheme"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.nav.notificationdemo.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <!-- File Chooser End -->
     </application>
 
 </manifest>

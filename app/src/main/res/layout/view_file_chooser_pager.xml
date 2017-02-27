@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_normal">
+
+    <TextView
+        android:id="@+id/page_number_textView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/blue_circle"
+        android:gravity="center"
+        android:padding="@dimen/padding_normal"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_medium" />
+
+    <TextView
+        android:id="@+id/page_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/padding_normal"
+        android:text="@string/slider_title_1"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/font_size_normal"
+        android:layout_toRightOf="@id/page_number_textView"/>
+
+    <ImageView
+        android:id="@+id/page_back_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/page_title_textView"
+        android:layout_marginBottom="@dimen/padding_normal"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:gravity="center"
+        android:padding="@dimen/padding_normal"
+        android:src="@drawable/im1"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_large"
+        android:scaleType="fitCenter"/>
+
+</RelativeLayout>

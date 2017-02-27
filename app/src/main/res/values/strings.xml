@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Notification Demo</string>
     <string name="notification_demo">Notification Demo</string>
+
+    <string name="slider_title_1">Verify the format of your Excel Sheet</string>
+    <string name="slider_title_2">Select files to import we support \'xls\' and \'xlsx\'</string>
+    <string name="slider_title_3">This is third screen description</string>
+
 </resources>
